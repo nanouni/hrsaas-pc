@@ -1,6 +1,7 @@
 // 这是scss的环境，要用scss的导入语法
 // @import 'scss文件路径'
 @import './variables.scss'; // 变量
+@import './common.scss';
 @import './mixin.scss';
 @import './transition.scss';
 @import './element-ui.scss';

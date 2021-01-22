@@ -14,7 +14,8 @@ export function isExternal(path) {
  * @param {string} str
  * @returns {Boolean}
  */
-export function validUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+
+//  提供一个手机号的验证方法
+export function validateMobile(str) {
+  return /^1[3-9]\d{9}$/.test(str)
 }

@@ -30,16 +30,30 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
+    // 开发服务器（开发环境）
     port: port,
     open: true,
     overlay: {
       warnings: false,
       errors: true
+    },
+    // 配置代理服务
+    proxy: {
+      // 只要请求的路径以/api开头，就意味着，需要走代理
+      // 默认：localhost:8888/api/login => http://www.baidu.com/api/login
+      // 重写：localhost:8888/api/login => http://www.baidu.com/login
+      // 如果：如果将来请求路径中，就有这个标识，不需要重写，如果没有，就需要将标识去掉
+      '/api': {
+        target: 'http://ihrm-java.itheima.net/' // 跨域请求的地址
+        // 路径重写
+        // PathRewrite：{
+        //   '^/api': ''
+        // }
+      }
     }
   },
   configureWebpack: {
-    // provide the app's title in webpack's name field, so that
-    // it can be accessed in index.html to inject the correct title.
+    // 配置单页应用程序页面的标题
     name: name,
     resolve: {
       alias: {

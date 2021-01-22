@@ -1,6 +1,7 @@
 // import request from '@/utils/request'
 
-export function login(data) {
+// 登录请求
+export function reqLogin(data) {
 
 }
 

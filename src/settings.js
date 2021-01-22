@@ -1,7 +1,7 @@
 // 小的设置配置文件，起一些变量，供项目的任何地方使用
 module.exports = {
   // 网站标题（初始值）
-  title: 'Vue Admin Template',
+  title: '人力资源管理平台',
 
   /**
    * @type {boolean} true | false

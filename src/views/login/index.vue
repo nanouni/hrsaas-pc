@@ -60,6 +60,8 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import { validateMobile } from '@/utils/validate'
+// import { reqLogin } from '@/api/user'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -98,6 +100,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('user', ['login']),
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -114,9 +117,18 @@ export default {
         if (valid) {
           // 验证通过
           this.loading = true // 让登录按钮加载状态
-          const loginUrl = '/sys/login' // 走代理
-          this.$request.post(loginUrl, this.loginForm).then((res) => {
-            console.log(res)
+          // 调用action获取token，存到vuex中
+          // 需求：页面中逻辑，调完action，成功：跳换首页，失败：添加提示
+          // 发送登录请求
+          // reqLogin(this.loginForm).then((res) => {
+          this.login(this.loginForm).then((res) => {
+            console.log('成功', res)
+            this.$message.success('登录成功')
+            this.$router.push('/')
+          }).catch(error => {
+            console.log(error)
+          }).finally(() => {
+            this.loading = false // 关闭加载状态
           })
         } else {
           console.log('error submit!!')
